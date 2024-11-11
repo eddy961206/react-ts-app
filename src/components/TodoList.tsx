@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import TodoItem from './TodoItem';
 import { Todo } from '../types';
 
-
 const TodoList: React.FC = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
     const [newTodo, setNewTodo] = useState('');
@@ -27,6 +26,10 @@ const TodoList: React.FC = () => {
         );
     };
 
+    const deleteTodo = (id: number) => {
+        setTodos(todos.filter(todo => todo.id !== id));
+    };
+
     return (
         <div>
             <h2>To-Do List</h2>
@@ -39,7 +42,7 @@ const TodoList: React.FC = () => {
             <button onClick={addTodo}>추가</button>
             <ul>
                 {todos.map(todo => (
-                    <TodoItem key={todo.id} todo={todo} toggleTodo={toggleTodo} />
+                    <TodoItem key={todo.id} todo={todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
                 ))}
             </ul>
         </div>
